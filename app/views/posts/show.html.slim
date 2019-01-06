@@ -1,0 +1,25 @@
+h1 タスクの詳細
+
+.nav.justify-contend-end
+  = link_to '一覧', posts_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th= Post.human_attribute_name(:book_title)
+      td= @post.book_title
+    tr
+      th= Post.human_attribute_name(:sentence1)
+      td= simple_format(h(@post.sentence1), {}, sanitize: false,wrapper_tag: "div")
+    tr
+      th= Post.human_attribute_name(:image)
+      td= image_tag @post.image.variant(resize: '100x100') if @post.image.attached?
+    tr
+      th= Post.human_attribute_name(:created_at)
+      td= @post.created_at
+    tr
+      th= Post.human_attribute_name(:updated_at)
+      td= @post.updated_at
+
+-if current_user.present? && @post.user_id == current_user.id
+  = link_to '編集', edit_post_path, class: 'btn btn-primary mr-3'
+  = link_to '削除', @post, method: :delete, data: { confirm: "タスク「#{@post.book_title}」を削除します。よろしいですか？"}, class: 'btn btn-danger'

@@ -1,0 +1,25 @@
+- if post.errors.present?
+  ul#error_explanation
+    -post.errors.full_messages.each do |message|
+      li= message
+dev.container
+  = form_with model: post, local: true do |f|
+    .form-group
+      = f.label :本のタイトル
+      = f.text_field :book_title, class: 'form-control', id: 'book_title'
+    .form-group
+      = f.label :最も印象に残った一文
+      = f.text_area :sentence1, rows: 3, class: 'form-control', id: 'sentence1'
+    .form-group
+      = f.label :"2番目に印象に残った一文"
+      = f.text_area :sentence2, rows: 3, class: 'form-control', id: 'sentence2'
+    .form-group
+      = f.label :"3番目に印象に残った一文"
+      = f.text_area :sentence3, rows: 3, class: 'form-control', id: 'sentence3'
+    .form-group
+      = f.label :補足情報
+      = f.text_area :supplement, rows: 5, class: 'form-control', id: 'supplement'
+    .form-group
+      = f.label :image
+      = f.file_field :image, class: 'form-control'
+    = f.submit nil, class: 'btn btn-primary'
