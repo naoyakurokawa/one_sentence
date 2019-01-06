@@ -4,17 +4,18 @@ h1 投稿一覧
     table.table.table-hover.tab
       tbody
         tr
-          th= "本の画像"
           td= image_tag post.image.variant(resize: '150x300') if post.image.attached?
         tr
-          th= "本のタイトル"
-          td= post.book_title
+          td
+            p.headline 本のタイトル
+            p =post.book_title
         tr
-          th= "最も印象に残った一文"
-          td.tab1= post.sentence1
+          td
+            p.headline 最も印象に残った一文
+            p =post.sentence1
+            = link_to '詳細', post_path(post), class: 'btn btn-primary'
         tr
-          th
-          td= link_to '詳細', post_path(post), class: 'btn btn-primary'
-        tr
-          th= image_tag post.user.image.variant(resize: '50x50') if post.user.image.attached?
-          td= link_to post.user.name, post.user
+          td
+           p.headline 投稿者
+           = image_tag post.user.image.variant(resize: '50x50') if post.user.image.attached?
+           = link_to post.user.name, post.user

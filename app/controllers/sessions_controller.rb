@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'ログインしました。'
+      redirect_to "/posts", notice: 'ログインしました。'
     else
       render :new
     end
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to root_path, notice: 'ログアウトしました。'
+    redirect_to "/posts", notice: 'ログアウトしました。'
   end
 
 
