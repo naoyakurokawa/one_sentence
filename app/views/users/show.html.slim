@@ -1,25 +1,39 @@
-h1 ユーザーの詳細
+h2 ユーザーの詳細
 
-.nav.justify-contend-end
-  = link_to '一覧', users_path, class: 'nav-link'
-table.table.table-hover
-  tbody
-    tr
-      th= User.human_attribute_name(:name)
-      td= @user.name
-    tr
-      th= User.human_attribute_name(:email)
-      td= @user.email
-    tr
-      th= User.human_attribute_name(:image)
-      td= image_tag @user.image.variant(resize: '100x100') if @user.image.attached?
-    tr
-      th= User.human_attribute_name(:created_at)
-      td= @user.created_at
-    tr
-      th= User.human_attribute_name(:updated_at)
-      td= @user.updated_at
+div.container.border.border-dark.mx-auto.mt-5.p-5
+  table.table.table-hover
+    tbody
+      tr
+        th= "ユーザー名"
+        td= @user.name
+      tr
+        th= "メールアドレス"
+        td= @user.email
+      tr
+        th= "画像"
+        td= image_tag @user.image.variant(resize: '100x100') if @user.image.attached?
+  -if current_user.present? && @user.id == current_user.id
+    = link_to '編集', edit_user_path, class: 'btn btn-primary mr-3'
+    = link_to '削除', @user, method: :delete, data: { confirm: "ユーザー「#{@user.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
 
--if current_user.present? && @user.id == current_user.id
-  = link_to '編集', edit_user_path, class: 'btn btn-primary mr-3'
-  = link_to '削除', @user, method: :delete, data: { confirm: "ユーザー「#{@user.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger'
+div.m-5
+  h2 ="#{@user.name}さんの投稿一覧"
+  - @user.posts.each do |post|
+    div.border.border-dark.m-3.p-3.d-inline-block.postindex
+      table.table.table-hover.tab
+        tbody
+          tr
+            th= "本の画像"
+            td= image_tag post.image.variant(resize: '150x300') if post.image.attached?
+          tr
+            th= "本のタイトル"
+            td= post.book_title
+          tr
+            th= "最も印象に残った一文"
+            td.tab1= post.sentence1
+          tr
+            th
+            td= link_to '詳細', post_path(post), class: 'btn btn-primary'
+          tr
+            th= image_tag post.user.image.variant(resize: '50x50') if post.user.image.attached?
+            td= link_to post.user.name, post.user

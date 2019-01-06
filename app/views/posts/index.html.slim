@@ -1,20 +1,20 @@
 h1 投稿一覧
 - @posts.each do |post|
-  div.container.border.border-dark.mx-auto.mt-5.p-5
-    div.d-inline-block.m-3.postindex
-      = image_tag post.image.variant(resize: '150x300') if post.image.attached?
-    div.d-inline-block.m-3.postindex
-      table.table.table-hover
-        tbody
-          tr
-            th= "本のタイトル"
-            td= post.book_title
-          tr
-            th= "最も印象に残った一文"
-            td= simple_format(h(post.sentence1), {}, sanitize: false,wrapper_tag: "div")
-          tr
-            th
-            td= link_to '詳細', post_path(post), class: 'btn btn-primary'
-          tr
-            th= image_tag post.user.image.variant(resize: '50x50') if post.user.image.attached?
-            td= post.user.name
+  div.border.border-dark.m-3.p-3.d-inline-block.postindex
+    table.table.table-hover.tab
+      tbody
+        tr
+          th= "本の画像"
+          td= image_tag post.image.variant(resize: '150x300') if post.image.attached?
+        tr
+          th= "本のタイトル"
+          td= post.book_title
+        tr
+          th= "最も印象に残った一文"
+          td.tab1= post.sentence1
+        tr
+          th
+          td= link_to '詳細', post_path(post), class: 'btn btn-primary'
+        tr
+          th= image_tag post.user.image.variant(resize: '50x50') if post.user.image.attached?
+          td= link_to post.user.name, post.user
