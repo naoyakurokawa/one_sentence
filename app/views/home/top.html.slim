@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title
+      | One_Sentence
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    div.top-main
+     div.top-sub
+        div.top-message
+          h1 本の一文から学ぼう
+        div
+          a class="btn-lg btn-dark m-3" href="/login" role="button"
+            |
+              ログイン
+          a class="btn-lg btn-dark m-3" href="/users/new" role="button"
+            |
+              会員登録
+        div.m-3
+          a href="/posts"
+            |
+              会員しないで見る

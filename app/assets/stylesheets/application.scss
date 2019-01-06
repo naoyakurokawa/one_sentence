@@ -1,5 +1,20 @@
 @import "bootstrap";
 
+.top-main{
+  height: 800px;
+  background:url(/top.png);
+  background-size:cover;
+  position: relative;
+  text-align: center;
+}
+
+.top-sub{
+  position: absolute;
+  left: calc(50% - 150px);
+  top: calc(50% - 100px);
+}
+
+
 .postindex{
   vertical-align: top;
   width:400px;
