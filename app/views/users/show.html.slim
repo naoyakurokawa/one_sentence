@@ -1,4 +1,4 @@
-h2 ユーザーの詳細
+h2 ="#{@user.name}さんの情報"
 
 div.container.border.border-dark.mx-auto.mt-5.p-5
   table.table.table-hover
@@ -24,13 +24,13 @@ div.m-5
         tbody
           tr
             th= "本の画像"
-            td= image_tag post.image.variant(resize: '150x300') if post.image.attached?
+            td= image_tag post.image.variant(resize: '150x200') if post.image.attached?
           tr
             th= "本のタイトル"
             td= post.book_title
           tr
             th= "最も印象に残った一文"
-            td.tab1= post.sentence1
+            td.tab1= post.sentence1.slice(0..19)
           tr
             th
             td= link_to '詳細', post_path(post), class: 'btn btn-primary'

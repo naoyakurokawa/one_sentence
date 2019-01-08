@@ -4,7 +4,7 @@ h1 投稿一覧
     table.table.table-hover.tab
       tbody
         tr
-          td= image_tag post.image.variant(resize: '150x300') if post.image.attached?
+          td= image_tag post.image.variant(resize: '150x200') if post.image.attached?
         tr
           td
             p.headline 本のタイトル
@@ -12,7 +12,7 @@ h1 投稿一覧
         tr
           td
             p.headline 最も印象に残った一文
-            p =post.sentence1
+            p =post.sentence1.slice(0..19)
             = link_to '詳細', post_path(post), class: 'btn btn-primary'
         tr
           td
