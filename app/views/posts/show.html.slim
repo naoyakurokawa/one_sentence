@@ -1,32 +1,41 @@
-h1 投稿の詳細
+h2 投稿の詳細
 
 table.table.table-hover
   tbody
     tr
-      th= "本の画像"
+      th 本の画像
       td= image_tag @post.image.variant(resize: '150x300') if @post.image.attached?
     tr
-      th= "本のタイトル"
+      th 本のタイトル
       td= @post.book_title
     tr
-      th= "最も印象に残った一文"
+      th 最も印象に残った一文
       td= simple_format(h(@post.sentence1), {}, sanitize: false,wrapper_tag: "div")
     tr
-      th= "2番目に印象に残った一文"
+      th 2番目に印象に残った一文
       td= simple_format(h(@post.sentence2), {}, sanitize: false,wrapper_tag: "div")
     tr
-      th= "3番目に印象に残った一文"
+      th 3番目に印象に残った一文
       td= simple_format(h(@post.sentence3), {}, sanitize: false,wrapper_tag: "div")
     tr
-      th= "補足情報"
+      th 補足情報
       td= simple_format(h(@post.supplement), {}, sanitize: false,wrapper_tag: "div")
     tr
-      th= "投稿日時"
+      th 投稿日時
       td= @post.created_at.strftime('%Y-%m-%d  %H:%M')
     tr
-      th= "更新日時"
+      th 更新日時
       td= @post.updated_at.strftime('%Y-%m-%d  %H:%M')
 
+-if current_user.present? && Like.find_by(user_id:current_user.id,post_id:@post.id)
+  = link_to("/likes/#{@post.id}/destroy",{method:"delete"})do
+    span class="fa fa-heart like-btn"
+-else
+  = link_to("/likes/#{@post.id}/create",{method:"post"})do
+    span class="far fa-heart like-btn"
+
+= Like.where(post_id:@post.id).count
+
 -if current_user.present? && @post.user_id == current_user.id
-  = link_to '編集', edit_post_path, class: 'btn btn-primary mr-3'
+  = link_to '編集', edit_post_path, class: 'btn btn-primary m-3'
   = link_to '削除', @post, method: :delete, data: { confirm: "タスク「#{@post.book_title}」を削除します。よろしいですか？"}, class: 'btn btn-danger'

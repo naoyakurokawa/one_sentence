@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root to: 'home#top'
   resources :posts
   resources :users
+  post 'likes/:post_id/create', to: 'likes#create'
+  delete 'likes/:post_id/destory', to: 'likes#destory'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
